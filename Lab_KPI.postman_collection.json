@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "d96d6924-f112-42f5-82bc-1115d88c3a34",
+		"name": "Lab_KPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Current_Weather_OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"jsonData responce is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.location.country).to.eql(\"Ukraine\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.weatherstack.com/current?access_key=a93eaa1dfd7a0631c59f9debb6a763c1&query=Kiev",
+					"protocol": "http",
+					"host": [
+						"api",
+						"weatherstack",
+						"com"
+					],
+					"path": [
+						"current"
+					],
+					"query": [
+						{
+							"key": "access_key",
+							"value": "a93eaa1dfd7a0631c59f9debb6a763c1"
+						},
+						{
+							"key": "query",
+							"value": "Kiev"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Current_Weather_False_Key_101",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Error code is 101\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error.code).to.eql(101);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.weatherstack.com/current?access_key=b93eaa1dfd7b0631c59f9debb6a763b1&query=Kiev",
+					"protocol": "http",
+					"host": [
+						"api",
+						"weatherstack",
+						"com"
+					],
+					"path": [
+						"current"
+					],
+					"query": [
+						{
+							"key": "access_key",
+							"value": "b93eaa1dfd7b0631c59f9debb6a763b1"
+						},
+						{
+							"key": "query",
+							"value": "Kiev"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Current_Weather_Changed_Units_OK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"jsonData responce is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.request.unit).to.eql(\"f\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.weatherstack.com/current?access_key=a93eaa1dfd7a0631c59f9debb6a763c1&query=Kiev&units=f",
+					"protocol": "http",
+					"host": [
+						"api",
+						"weatherstack",
+						"com"
+					],
+					"path": [
+						"current"
+					],
+					"query": [
+						{
+							"key": "access_key",
+							"value": "a93eaa1dfd7a0631c59f9debb6a763c1"
+						},
+						{
+							"key": "query",
+							"value": "Kiev"
+						},
+						{
+							"key": "units",
+							"value": "f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Current_Weather_Invalid_Api_Function_103",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Error code is 103\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error.code).to.eql(103);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.weatherstack.com/some?access_key=a93eaa1dfd7a0631c59f9debb6a763c1&query=Kiev&units=f",
+					"protocol": "http",
+					"host": [
+						"api",
+						"weatherstack",
+						"com"
+					],
+					"path": [
+						"some"
+					],
+					"query": [
+						{
+							"key": "access_key",
+							"value": "a93eaa1dfd7a0631c59f9debb6a763c1"
+						},
+						{
+							"key": "query",
+							"value": "Kiev"
+						},
+						{
+							"key": "units",
+							"value": "f"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
